@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+a {
+  margin-right: 20px;
+  margin-left: 20px;
+} 
+button {
+  margin-right: 10px;
+}
+
+
+
