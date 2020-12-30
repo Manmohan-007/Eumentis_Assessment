@@ -1,8 +1,7 @@
 import { Button, TextField } from '@material-ui/core'
-import { Subject } from '@material-ui/icons';
 import React, { useState, useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { store } from '../Store';
+import { store } from '../../Store';
 import MaterialStyles from "./Style";
 export default function Dashboard() {
     const [StudentData, setStudentData] = useState({ StudentName: "", StudentRoll: "" })
@@ -13,9 +12,13 @@ export default function Dashboard() {
 
     const SubjectsList = globalState.state.SubjectArr
     let tempArr = [...SubjectsList]
+    let SubjectsMarkobj = {}
+
     for (var i = 1; i <= tempArr.length; i = (i + 3)) {
+        SubjectsMarkobj[tempArr[i - 1]] = []
         tempArr.splice(i, 0, 0)
         tempArr.splice(i + 1, 0, 0)
+
     }
 
 
@@ -68,7 +71,10 @@ export default function Dashboard() {
         if (item.subject !== undefined) {
             const entries = Object.entries(item.subject)
             for (const [subject, marks] of entries) {
+
+
                 if (tempArr.indexOf(subject) != -1) {
+                    SubjectsMarkobj[subject].push(marks)
                     tempArr[tempArr.indexOf(subject) + 1] = parseInt(tempArr[tempArr.indexOf(subject) + 1]) + parseInt(marks)
                     tempArr[tempArr.indexOf(subject) + 2] = parseInt(tempArr[tempArr.indexOf(subject) + 2]) + 1
 
@@ -80,9 +86,11 @@ export default function Dashboard() {
 
             }
 
-            localStorage.setItem("temp", JSON.stringify([...tempArr]))
+
 
         }
+        globalState.state["SubjectMarksObj"] = { ...SubjectsMarkobj }
+        globalState.state.SubjectwiseTotalMarks = [...tempArr]
 
 
         return (
@@ -140,7 +148,6 @@ export default function Dashboard() {
                             <th className={Styles.th}>Class</th>
                             <th className={Styles.th}>Subject</th>
                             <th className={Styles.th}>Student-Wise Total Marks</th>
-                            <th className={Styles.th}>StudentRoll</th>
                         </tr>
                     </thead>
 

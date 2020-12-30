@@ -1,8 +1,8 @@
 import './App.css';
-import Dashboard from './Components/Dashboard';
+import Dashboard from './Components/Dashboard/Dashboard';
 import StudentDetails from './Container/StudentDetails';
-import { Switch, BrowserRouter, Route, Redirect } from 'react-router-dom';
-import Statistics from './Components/Statistics';
+import { Switch, BrowserRouter, Route } from 'react-router-dom';
+import Statistics from './Components/Statistics/Statistics';
 function App() {
   return (
 
@@ -12,9 +12,6 @@ function App() {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/StudentDetails" component={StudentDetails} />
           <Route exact path="/Statistics" component={Statistics} />
-
-
-
         </Switch>
       </div>
     </BrowserRouter>
